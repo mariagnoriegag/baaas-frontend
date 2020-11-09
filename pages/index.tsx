@@ -1,37 +1,97 @@
 import React from "react";
 import { NextPage } from "next";
 import Layout from "../components/layout";
-import { Box, Grid } from "@chakra-ui/core";
+import {
+    Box,
+    Button,
+    Flex,
+    FormControl,
+    FormErrorMessage,
+    FormLabel,
+    Grid,
+    Input,
+    Text,
+} from "@chakra-ui/core";
 // import { useCountriesQuery } from "../integration/graphql";
 import { useRouter } from "next/router";
+import { Formik, Form, Field } from "formik";
 
 const Home: NextPage = () => {
-    // const router = useRouter();
+    const router = useRouter();
     // const [{ data, fetching, error }] = useCountriesQuery();
+    const validateName = (value) => {
+        console.log(value);
+        let error;
+        if (!value) {
+            error = "El código es requerido.";
+        } else if (value.length > 8) {
+            error = "El código no debe tener más de 8 caracteres.";
+        }
+        return error;
+    };
+
     return (
         <Box>
-            <Layout title={"Results"}>
+            <Layout title={"Validación de formularios"} index={0}>
                 <Grid
-                    my={4}
-                    templateColumns="repeat(auto-fill, minmax(150px, 1fr))"
-                    gap={2}
+                    my={6}
+                    gap={6}
+                    templateColumns="repeat(auto-fit, minmax(250px, 1fr))"
                 >
-                    {/* {!error &&
-                        !!data &&
-                        !!data.Country &&
-                        data.Country.map((country) => (
-                            <Box
-                                key={country._id}
-                                onClick={() => router.push(`${country._id}`)}
-                                cursor="pointer"
-                                borderWidth="1px"
-                                borderRadius="sm"
-                                overflow="hidden"
-                                p={2}
-                            >
-                                {country.flag.emoji} {country.name}
-                            </Box>
-                        ))} */}
+                    <Box flex="1">
+                        <Formik
+                            initialValues={{ code: "" }}
+                            onSubmit={(values, actions) => {
+                                setTimeout(() => {
+                                    alert(JSON.stringify(values, null, 2));
+                                    actions.setSubmitting(false);
+                                }, 1000);
+                            }}
+                        >
+                            {(props) => (
+                                <Form>
+                                    <Field name="name" validate={validateName}>
+                                        {({ field, form }) => (
+                                            <FormControl
+                                                isInvalid={
+                                                    form.errors.name &&
+                                                    form.touched.name
+                                                }
+                                            >
+                                                <FormLabel htmlFor="name">
+                                                    Código de operación
+                                                </FormLabel>
+                                                <Input
+                                                    {...field}
+                                                    id="code"
+                                                    placeholder="Ingrese el código"
+                                                    width={[
+                                                        "100%",
+                                                        "100%",
+                                                        "70%",
+                                                        "50%",
+                                                    ]}
+                                                    focusBorderColor="teal.500"
+                                                />
+                                                <FormErrorMessage>
+                                                    {form.errors.name}
+                                                </FormErrorMessage>
+                                            </FormControl>
+                                        )}
+                                    </Field>
+                                    <Button
+                                        mt={4}
+                                        colorScheme="teal"
+                                        isLoading={props.isSubmitting}
+                                        type="submit"
+                                    >
+                                        Validar
+                                    </Button>
+                                </Form>
+                            )}
+                        </Formik>
+                    </Box>
+                    <Box flex="1">Result</Box>
                 </Grid>
             </Layout>
         </Box>
