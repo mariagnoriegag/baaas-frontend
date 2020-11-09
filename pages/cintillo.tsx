@@ -5,7 +5,6 @@ import { Box, Flex, Grid, Text, useColorModeValue } from "@chakra-ui/core";
 // import { useCountriesQuery } from "../integration/graphql";
 import { useRouter } from "next/router";
 import { useDropzone } from "react-dropzone";
-import { AttachmentIcon } from "@chakra-ui/icons";
 
 const Cintillo: NextPage = () => {
     const router = useRouter();
@@ -41,7 +40,6 @@ const Cintillo: NextPage = () => {
                         py={10}
                         cursor="pointer"
                     >
-                        <AttachmentIcon />
                         <input {...getInputProps()} />
                         {isDragActive ? (
                             <Text>Sube imágenes</Text>
