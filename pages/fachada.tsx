@@ -5,6 +5,7 @@ import { Box, Flex, Grid, Text, useColorModeValue } from "@chakra-ui/core";
 // import { useCountriesQuery } from "../integration/graphql";
 import { useRouter } from "next/router";
 import { useDropzone } from "react-dropzone";
+import { AttachmentIcon } from "@chakra-ui/icons";
 
 const Fachada: NextPage = () => {
     const router = useRouter();
