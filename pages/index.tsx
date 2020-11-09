@@ -11,6 +11,7 @@ import {
     Grid,
     Input,
     Text,
+    useColorModeValue,
 } from "@chakra-ui/core";
 // import { useCountriesQuery } from "../integration/graphql";
 import { useRouter } from "next/router";
@@ -19,6 +20,8 @@ import { Formik, Form, Field } from "formik";
 const Home: NextPage = () => {
     const router = useRouter();
     // const [{ data, fetching, error }] = useCountriesQuery();
+    const bg = useColorModeValue("gray.100", "gray.800");
+    const borderColor = useColorModeValue("teal.500", "gray.100");
     const validateName = (value) => {
         console.log(value);
         let error;
@@ -72,6 +75,7 @@ const Home: NextPage = () => {
                                                         "50%",
                                                     ]}
                                                     focusBorderColor="teal.500"
+                                                    variant="filled"
                                                 />
                                                 <FormErrorMessage>
                                                     {form.errors.name}
@@ -91,7 +95,16 @@ const Home: NextPage = () => {
                             )}
                         </Formik>
                     </Box>
-                    <Box flex="1">Result</Box>
+                    <Box
+                        flex="1"
+                        p={6}
+                        bg={bg}
+                        borderWidth={2}
+                        borderColor={borderColor}
+                        borderRadius={10}
+                    >
+                        Result
+                    </Box>
                 </Grid>
             </Layout>
         </Box>
