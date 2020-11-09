@@ -103,7 +103,16 @@ const Home: NextPage = () => {
                         borderColor={borderColor}
                         borderRadius={10}
                     >
-                        <Box pb={2} fontWeight="bold" color={borderColor} borderBottom={2} borderColor={borderColor} borderStyle="solid">CAMPO 1 CORRECTO | CAMPO 2 INCORRECTO</Box>
+                        <Box
+                            pb={2}
+                            fontWeight="bold"
+                            color={borderColor}
+                            borderBottom={2}
+                            borderColor={borderColor}
+                            borderStyle="solid"
+                        >
+                            CAMPO 1 CORRECTO | CAMPO 2 INCORRECTO
+                        </Box>
                         <Box py={4}>Result</Box>
                     </Box>
                 </Grid>
